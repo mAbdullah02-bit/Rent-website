@@ -8,7 +8,7 @@ function About() {
         <img 
           src="/images/car.png" 
           alt="Car Image" 
-          className="h-80 w-full object-cover " 
+          className="h-[600px] w-full object-cover " 
         />
       </div>
 
