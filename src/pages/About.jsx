@@ -6,9 +6,9 @@ function About() {
       {/* Background Image Section */}
       <div className="relative">
         <img 
-          src="/images/car.png" 
+          src="/images/image 55.png" 
           alt="Car Image" 
-          className="h-[600px] w-full object-cover " 
+          className="h-[300px] w-full object-cover " 
         />
       </div>
 
