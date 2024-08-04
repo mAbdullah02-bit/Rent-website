@@ -4,6 +4,17 @@ import Home from './pages/Home'
 import About from './pages/About'
 import Vans from './pages/Vans'
 import Vehicledetails from './pages/Vehicledetails'
+import Layout from './components/Layout'
+import Host from './pages/Host/Host'
+import Hostincome from './pages/Host/Hostincome'
+import HostReview from './pages/Host/HostReview'
+import HostLayoute from './pages/Host/HostLayoute'
+import HostVans from './pages/Host/HostVans'
+import HostVandetails from './pages/Host/HostVandetails'
+import Hostpricing from './pages/Host/Hostpricing'
+import Hostphotos from './pages/Host/Hostphotos'
+import Hostdetails from './pages/Host/Hostdetails'
+import NotFound from './pages/Notfound'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -11,24 +22,35 @@ function App() {
     <>
       
 
+
+
+
       <BrowserRouter> 
-      <header className='relative h-[80px] bg-[#ffd9ab] flex justify-between w-full'>
-<Link to='/' className='relative top-7 left-5 font-extrabold text-xl'>CARS DOME </Link>
-<nav className='space-x-8 font-medium absolute  right-12 top-7 text-smd '>
+     <Routes>
+   <Route  path='/' element={<Layout/>}>
+   <Route index element={<Home/>}  />
+   <Route path='about' element={<About/>}  />
+   <Route path='vehicles' element={<Vans/>}  />
+   <Route path='vehicles/:id' element={<Vehicledetails/>}  />
+   
+   <Route path='/host' element={<HostLayoute/>}  >
 
-<Link className=' '  to="/about">ABOUT</Link>
-<Link  to="/vehicles">VEHICLES</Link>
-</nav>
-      </header>
+   <Route index element={<Host/>}  />
+   <Route path='income' element={<Hostincome/>}  />
+   <Route path='review' element={<HostReview/>}  />
+   <Route path='vans' element={<HostVans/>}  />
+   
+   <Route path='vans/:id' element={<HostVandetails/>}  >
+   <Route index element={<Hostdetails/>} />
+   <Route path='pricing' element={<Hostpricing/>} />
+   <Route path='photos' element={<Hostphotos/>} />
+   </Route>
+   </Route>
+   <Route path="*" element={<NotFound />}/>
+     </Route>
 
-    <Routes>
-   <Route path='/' element={<Home/>}  />
-   <Route path='/about' element={<About/>}  />
-   <Route path='/vehicles' element={<Vans/>}  />
-   <Route path='/vehicles/:id' element={<Vehicledetails/>}  />
-
-    </Routes>
-    </BrowserRouter>
+     </Routes>
+      </BrowserRouter>
 
     </>
   )
