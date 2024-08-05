@@ -1,20 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useSearchParams } from 'react-router-dom';
-
+import { getVans } from '../api';
 function Vans() {
   const [vehicles, setVehicles] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [loading,setLoading]=useState(false);
+  const [error,setError]=useState(null);
+  
+  
   const typeFilter = searchParams.get("type");
 
   const displayVans = typeFilter
     ? vehicles.filter((vehicle) => vehicle.type === typeFilter)
     : vehicles;
 
-  useEffect(() => {
-    fetch("/api/vans")
-      .then((res) => res.json())
-      .then((data) => setVehicles(data.vans));
-  }, []);
+    React.useEffect(() => {
+      async function loadVans() {
+        setLoading(true)
+        try{
+          const data = await getVans()
+          setVehicles(data)
+        }catch(err){
+          setError(err)
+        }finally{
+          setLoading(false)
+
+        }
+
+      }
+      
+      loadVans()
+  }, [])
 
   const vehicleElements = displayVans.map((vehicle) => (
     <div key={vehicle.id} className="sm:m-3 sm:w-[80%] md:w-5/6 lg:w-5/6 xl:w-5/6 border border-black border-spacing-1 rounded-lg overflow-hidden">
@@ -33,9 +49,28 @@ function Vans() {
     </div>
   ));
 
+  function handleFilterChange(key, value) {
+    setSearchParams(prevParams => {
+        if (value === null) {
+            prevParams.delete(key)
+        } else {
+            prevParams.set(key, value)
+        }
+        return prevParams
+    })
+}
+
+if (loading) {
+  return <h1 className='text-4xl font-bold m-40'>Loading...</h1>
+}
+if (error) {
+  return <h1>There was an error: {error.message}</h1>
+}
   return (
     <>
-      <div className="m-4 relative top-4 p-4 rounded-lg">
+    
+   
+     <div className="m-4 relative top-4 p-4 rounded-lg">
         <h1 className="font-bold text-lg mb-2">Explore our van options</h1>
         <div className="flex flex-wrap space-x-2">
           <button

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { NavLink } from 'react-router-dom';
 function Home() {
   return (
     <div className="relative h-screen overflow-hidden">
@@ -12,9 +12,9 @@ function Home() {
             Experience the freedom of the open road with our wide selection of rental cars. Whether you need a compact car for city driving or a spacious SUV for a family adventure, we have the perfect vehicle for you. Start your journey today with our easy and convenient rental process.
           </p>
         </div>
-        <button className="bg-[#ffad6e] tracking-widest text-white p-2 rounded-md text-xl font-bold px-40 transition duration-300 ease-in-out transform hover:scale-105 hover:bg-[#ff7f3f] hover:shadow-lg">
+        <NavLink to="/vehicles"  className="bg-[#ffad6e] tracking-widest text-white p-2 rounded-md text-xl font-bold px-40 transition duration-300 ease-in-out transform hover:scale-105 hover:bg-[#ff7f3f] hover:shadow-lg">
           Rent a Car
-        </button>
+        </NavLink>
       </div>
     </div>
   );
