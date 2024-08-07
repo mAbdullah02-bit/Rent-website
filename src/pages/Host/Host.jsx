@@ -1,15 +1,15 @@
-import React from "react"
+import React, {useState,useEffect} from "react"
 import { Link } from "react-router-dom"
 import { BsStarFill } from "react-icons/bs"
-import { getHostVans } from "../../api"
+import { getHostvehicles } from "../../api"
 
 export default function Host() {
-    const [vans, setVans] = React.useState([])
-    const [loading, setLoading] = React.useState(false)
-    const [error, setError] = React.useState(null)
-    React.useEffect(() => {
+    const [vans, setVans] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+   useEffect(() => {
         setLoading(true)
-        getHostVans()
+        getHostvehicles()
             .then(data => setVans(data))
             .catch(err => setError(err))
             .finally(() => setLoading(false))
@@ -58,7 +58,7 @@ export default function Host() {
                 <p>
                     <span>5.0</span>/5
                 </p>
-                <Link to="reviews">Details</Link>
+                <Link to="review">Details</Link>
             </section>
             <section className="host-dashboard-vans">
                 <div className="top">
