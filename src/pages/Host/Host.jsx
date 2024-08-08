@@ -17,13 +17,13 @@ export default function Host() {
 
     function renderVanElements(vans) {
         const hostVansEls = vans.map((van) => (
-            <div className="host-van-single" key={van.id}>
+            <div className="host-van-single relative" key={van.id}>
                 <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
                 <div className="host-van-info">
                     <h3>{van.name}</h3>
                     <p>${van.price}/day</p>
                 </div>
-                <Link to={`vans/${van.id}`}>View</Link>
+                <Link to={`vans/${van.id}`} className="absolute right-10 font-bold">View</Link>
             </div>
         ))
 
@@ -48,7 +48,7 @@ export default function Host() {
                     <p>Income last <span>30 days</span></p>
                     <h2>$2,260</h2>
                 </div>
-                <Link to="income">Details</Link>
+                <Link to="income" className="mx-5 font-bold">Details</Link>
             </section>
             <section className="host-dashboard-reviews">
                 <h2>Review score</h2>
@@ -58,12 +58,12 @@ export default function Host() {
                 <p>
                     <span>5.0</span>/5
                 </p>
-                <Link to="review">Details</Link>
+                <Link to="review" className=" font-bold mx-5" >Details</Link>
             </section>
             <section className="host-dashboard-vans">
                 <div className="top">
                     <h2>Your listed vans</h2>
-                    <Link to="vans">View all</Link>
+                    <Link to="vans " className="font-bold m-5">View all</Link>
                 </div>
                 {
                     loading && !vans
