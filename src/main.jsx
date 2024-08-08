@@ -92,7 +92,7 @@ createServer({
             type: "compact", 
             hostId: "107" 
           });
-        server.create("user", { id: "4221", email: "b@b.com", password: "p123", name: "Abdullah" });
+        server.create("user", { id: "4221", email: "a@b.com", password: "123", name: "Abdullah" });
     },
 
     routes() {

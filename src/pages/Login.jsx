@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { loginUser } from "../api"; // Ensure this is correctly imported from your API functions
+import { loginUser } from "../api";
 
 export default function Login() {
   const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" });
   const [status, setStatus] = React.useState("idle");
   const [error, setError] = React.useState(null);
   const [user, setUser] = React.useState(() => {
+    // Check if user is already logged in
+   
     const loggedInUser = localStorage.getItem("loggedin");
     return loggedInUser ? JSON.parse(loggedInUser) : null;
   });
@@ -15,7 +17,6 @@ export default function Login() {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from || "/host";
-
   function handleSubmit(e) {
     e.preventDefault();
     setStatus("submitting");
@@ -25,7 +26,7 @@ export default function Login() {
         setError(null);
         setUser(data.user); // Save user info
         localStorage.setItem("loggedin", JSON.stringify(data.user));
-        navigate(from, { replace: true });
+        navigate("/host",{replace:true});
       })
       .catch(err => {
         console.error("Login failed:", err);

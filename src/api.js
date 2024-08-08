@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, doc, getDoc, query, where } from "firebase/firestore/lite";
 
+
+import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyA-6a4dXv1rQo8zI3SXZ56ZmL9oAxj4t2k",
   authDomain: "car-rent--website.firebaseapp.com",
@@ -11,8 +14,14 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 const vehiclecollectionRef = collection(db, "vehicles");
+export const auth=getAuth(app)
+
+export default app
+
+
+
 
 export async function getvehicles() {
   try {
