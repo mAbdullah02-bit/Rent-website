@@ -63,12 +63,12 @@ export default function Login() {
   }
 
   return (
-    <div className="login-container m-10 py-6">
+    <div className="login-container h-screen py-20 my-20 ">
       {location.state?.message && (
         <h3 className="text-xl font-semibold text-red-700 ">{location.state.message}!</h3>
       )}
       {user ? (
-        <div>
+        <div >
           <h1 className="font-bold text-2xl m-5">Welcome, {user.name}</h1>
           <p>Email: {user.email}</p>
           <p>Password: {user.password}</p>
