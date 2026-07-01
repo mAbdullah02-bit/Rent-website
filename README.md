@@ -1,17 +1,18 @@
-# 🏠 Rent Website
+# 🚗 Rent Website
 
-A modern, responsive rental property website built with **React**, **Vite**, and **Tailwind CSS**. This application provides a user-friendly interface for browsing and managing rental properties.
+A modern, responsive car rental website built with **React**, **Vite**, and **Tailwind CSS**. This application provides users with an intuitive interface for browsing rental vehicles and hosts with a comprehensive dashboard to manage their fleet.
 
 ## ✨ Features
 
 - **Modern UI** - Built with React and styled with Tailwind CSS
 - **Fast Development** - Powered by Vite for instant HMR (Hot Module Replacement)
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
-- **Authentication** - Firebase integration for user authentication
-- **Routing** - Client-side routing with React Router
+- **Authentication** - Firebase integration for user authentication with auth guards
+- **Routing** - Client-side routing with React Router, including protected host routes
 - **Component Library** - MDB React UI Kit for pre-built components
-- **Icons** - React Icons for a comprehensive icon set
-- **Mock API** - MirageJS for API mocking and testing
+- **Icons** - React Icons for comprehensive icon set
+- **Mock API** - MirageJS for API mocking and development testing
+- **Host Dashboard** - Protected dashboard for hosts to manage vehicles, pricing, photos, and reviews
 - **Code Quality** - ESLint configured for maintaining code standards
 
 ## 🛠️ Tech Stack
@@ -82,14 +83,37 @@ npm run lint
 
 ```
 Rent-website/
-├── src/                    # Source code directory
-├── public/                 # Static assets
-├── index.html             # Main HTML file
-├── package.json           # Project dependencies
-├── vite.config.js         # Vite configuration
-├── tailwind.config.js     # Tailwind CSS configuration
-├── postcss.config.js      # PostCSS configuration
-└── .eslintrc.cjs          # ESLint configuration
+├── src/
+│   ├── pages/                 # Feature pages (Home, About, Vans, Login, NotFound)
+│   │   └── Host/              # Host dashboard with protected routes
+│   │       ├── Host.jsx
+│   │       ├── HostLayoute.jsx
+│   │       ├── HostVans.jsx
+│   │       ├── HostVandetails.jsx
+│   │       ├── Hostdetails.jsx
+│   │       ├── Hostincome.jsx
+│   │       ├── HostReview.jsx
+│   │       └── Hostphotos.jsx
+│   ├── components/            # Shared UI components
+│   │   ├── Layout.jsx         # Main layout wrapper
+│   │   ├── Header.jsx         # Navigation header
+│   │   ├── Footer.jsx         # Footer component
+│   │   └── AuthRequired.jsx   # Route protection guard
+│   ├── assets/                # Static assets
+│   ├── App.jsx                # Main router configuration
+│   ├── main.jsx               # Entry point with MirageJS setup
+│   ├── api.js                 # Firebase config and API functions
+│   ├── server.js              # Alternative MirageJS configuration
+│   ├── App.css                # App-specific styles
+│   └── index.css              # Global styles
+├── public/                    # Static files
+│   └── images/                # Image assets
+├── index.html                 # Main HTML file
+├── package.json               # Project dependencies
+├── vite.config.js             # Vite configuration
+├── tailwind.config.js         # Tailwind CSS configuration
+├── postcss.config.js          # PostCSS configuration
+└── .eslintrc.cjs              # ESLint configuration
 ```
 
 ## 🎨 Available Scripts
@@ -113,7 +137,7 @@ Rent-website/
 ### Production
 - **React** - UI library for building components
 - **Firebase** - Authentication and backend services
-- **React Router DOM** - Client-side routing
+- **React Router DOM** - Client-side routing with nested routes
 - **MDB React UI Kit** - Pre-built React components
 - **React Icons** - Icon library
 - **MirageJS** - API mocking for development
@@ -123,6 +147,25 @@ Rent-website/
 - **Tailwind CSS** - Utility-first CSS framework
 - **ESLint** - Code quality and style checking
 - **AutoPrefixer** - CSS vendor prefix automation
+
+## 🏗️ Architecture
+
+### Routing Structure
+- **Public Routes**: Home (`/`), About (`/about`), Vehicles (`/vehicles`), Vehicle Details (`/vehicles/:id`), Login (`/login`)
+- **Protected Routes**: Host dashboard (`/host/*`) - requires authentication via `AuthRequired` guard
+- **Host Subroutes**: Dashboard, Income, Reviews, Vans, Van Details (with Pricing & Photos tabs)
+
+### API Mock Server
+The application uses **MirageJS** to mock API endpoints during development:
+- `GET /api/vans` - Fetch all available vehicles
+- `GET /api/vans/:id` - Fetch a specific vehicle
+- `GET /api/host/vans` - Fetch host's vehicles (requires hostId)
+- `GET /api/host/vans/:id` - Fetch specific host vehicle
+- `POST /api/login` - User login endpoint
+
+Default test credentials (from mock server):
+- Email: `b@b.com`
+- Password: `p123`
 
 ## 🌐 Deployment
 
@@ -146,6 +189,10 @@ VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 VITE_FIREBASE_APP_ID=your_app_id
 ```
+
+## 🔐 Authentication
+
+The application integrates Firebase Authentication for user login and session management. Protected routes (host dashboard) require users to be authenticated via the `AuthRequired` component wrapper. During development, the MirageJS mock server provides test credentials for easy testing.
 
 ## 🤝 Contributing
 
